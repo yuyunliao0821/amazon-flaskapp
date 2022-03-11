@@ -1,16 +1,16 @@
 import re
 import numpy as np
-import sklearn
-
+from gensim.models import FastText
+import joblib
 
 class Preprocessor:
-    def __init__(self, text_cleaning_re, ft_model):
-        self.text_cleaning_re = text_cleaning_re
-        self.ft_model = ft_model
+    def __init__(self):
+        self.text_cleaning_re = "[^A-Za-z0-9 ]+"
+        self.ft_model = FastText.load('models/ft_model.model')
         
 
     #clean and tokenize text, helper function for get_doc_vec
-    def clean_and_tokenize(self, text):
+    def __clean_and_tokenize(self, text):
 
         text = re.sub(self.text_cleaning_re, '', text)
         #lowercase and simple whitespace tokenizer
@@ -21,7 +21,7 @@ class Preprocessor:
         """
         text : raw text entered in input textbox
         """
-        text = self.clean_and_tokenize(text)
+        text = self.__clean_and_tokenize(text)
         output=np.zeros(64)
         numw=0
         for token in text:
@@ -36,9 +36,9 @@ class Preprocessor:
             return output/numw
 
 class Predictor:
-    def __init__(self, lgr_model, svm_model):
-        self.lgr_model = lgr_model
-        self.svm_model = svm_model
+    def __init__(self):
+        self.lgr_model = joblib.load("models/lgr.pkl")
+        self.svm_model = joblib.load("models/svm.pkl")
 
     def predict_sentiment(self, mlmodel, vector):
         """
