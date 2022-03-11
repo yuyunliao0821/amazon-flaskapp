@@ -10,9 +10,9 @@
 </head>
 
 <body>
+    <h1 class='title'>Amazon review sentiment analysis app</h1>
     <!--main panel-->
     <div class='panel'>
-        <h1 class='title'>Amazon review sentiment analysis app</h1>
         <p>Enter your review and choose a model to predict:</p>
 
         <!--Input section: textarea & embedding method-->
@@ -25,11 +25,11 @@
             </select>
             <input type="submit" value="Predict!" class="button"></input>
         </form>
-        
-        <form action="{{url_for('clear')}}" method="POST">
-            <button class='button'>CLEAR</button>
-        </form>
-        {{prediction_text}}
+
+        <div class='prediction'>
+            <span id ='original-text'>{{entered_text}} {{original_text}}</span>
+            <span id='prediction-text'>{{prediction_text}}</span>
+        </div>
     </div>
 </body>
 
