@@ -40,8 +40,6 @@ def predict():
     return render_template('index.html',entered_text = "Entered Review:",
     original_text = text, prediction_text=sentiment)
 
-
-
 if __name__ == '__main__':
     #init()
     # run server
