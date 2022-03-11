@@ -1,1 +1,1 @@
-# amazon-flaskapp
+# A ML web app created using flask
