@@ -16,15 +16,14 @@
         <p>Enter your review and choose a model to predict:</p>
 
         <!--Input section: textarea & embedding method-->
-        <form action="{{url_for('predict')}}" method='POST' class='form'>
-            <textarea placeholder="Enter text here..." name='text' class='textbox'></textarea>
-            <br>
-            <select name='mlmodel'>
-                <option value='lgr'>Logistic Regression</option>
-                <option value='svm'>SVM</option>
-            </select>
-            <input type="submit" value="Predict!" class="button"></input>
-        </form>
+        <textarea placeholder="Enter text here..." name='text' class='textbox'></textarea>
+        <br>
+        <select name='mlmodel'>
+            <option value='lgr'>Logistic Regression</option>
+            <option value='svm'>SVM</option>
+        </select>
+        <input type="submit" name="predict" value="Predict!" class="button"
+        onclick="predict_sentiment();"></input>
 
         <div class='prediction'>
             <span id ='original-text'>{{entered_text}} {{original_text}}</span>
