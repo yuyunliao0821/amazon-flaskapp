@@ -25,7 +25,7 @@ def home():
 @app.route('/predict', methods=['POST'])
 def predict():
     result = request.get_json()[0]
-    result = result['text']+result['mlmodel']
+    result = result['text']+result['mlmodel']+'ajax is working!'
     print(result)
 
     return jsonify(result)
