@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, jsonify
 from service_tools.service import Predictor, Preprocessor
 
 app = Flask(__name__)
@@ -12,17 +12,23 @@ predictor = Predictor()
 def home():
     return render_template('index.html')
 
-@app.route('/predict',methods=['POST'])
+# @app.route('/predict', methods=['POST'])
+# def predict():
+#     print(request.args)
+#     if 'text' in request.args:
+#         text = request.args['text']
+#     if 'mlmodel' in request.args:
+#         mlmodel = request.args['mlmodel']
+#         print(mlmodel)
+    
+#     return text+mlmodel
+@app.route('/predict', methods=['POST'])
 def predict():
+    result = request.get_json()[0]
+    result = result['text']+result['mlmodel']
+    print(result)
 
-    mlmodel = request.form['mlmodel']
-    text = request.form['text']
-    doc_vec = preprocessor.get_doc_vec(text)
-    sentiment = predictor.predict_sentiment(mlmodel, doc_vec)
-
-    return render_template('index.html',entered_text = "Entered Review:",
-    original_text = text, prediction_text=sentiment)
-
+    return jsonify(result)
 
 if __name__ == '__main__':
     # run server
