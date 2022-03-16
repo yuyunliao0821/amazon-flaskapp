@@ -1,4 +1,4 @@
-function predict_sentiment() {
+function predictSentiment() {
   
   var inputText = document.getElementById("textbox").value;
   var selectedModel = document.getElementById('ml-model').value;
@@ -9,20 +9,20 @@ function predict_sentiment() {
   predictionContainer.style.display = 'flex';
   predictionText.style.display= 'None'
 
-  var server_data=[{
+  var serverData=[{
     'text':inputText,
     'mlmodel':selectedModel
   }]
 
   $.post({
     url:"/predict", 
-    data:JSON.stringify(server_data), 
+    data:JSON.stringify(serverData), 
     contentType:'application/json'}).done(function (data){
       predictionText.style.display = 'flex';
       predictionText.innerHTML = data;
       originalText.innerHTML = inputText;
     }
-    );
+  );
 
   //  $.get("/predict?"+"text="+inputText+"&"+"mlmodel="+selectedModel).done(function (data) {
   //    predictionText.innerHTML = data;
