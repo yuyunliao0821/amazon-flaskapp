@@ -20,8 +20,8 @@ window.onload = function(){
       data:JSON.stringify(serverData), 
       contentType:'application/json'}).done(function (data){
         predictionText.style.display = 'flex';
-        predictionText.innerHTML = data;
-        originalText.innerHTML = inputText;
+        predictionText.textContent = data;
+        originalText.textContent = inputText;
       }
     );
   
